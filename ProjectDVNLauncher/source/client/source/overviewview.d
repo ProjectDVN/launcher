@@ -5,7 +5,7 @@ import dvn;
 import globals;
 
 import std.conv : to;
-import std.file : dirEntries, SpanMode, getcwd;
+import std.file : dirEntries, SpanMode, getcwd, exists, mkdir;
 import std.path : baseName;
 import std.process : spawnProcess, Config, browse, executeShell, execute;
 import std.array : replace;
@@ -118,6 +118,11 @@ public final class OverviewView : View
         auto window = super.window;
 
         auto settings = getGlobalSettings();
+
+	if (!exists("projects"))
+	{
+		mkdir("projects");
+	}
 
         auto bgImage = new Image(window, "MainMenuBackground");
         addComponent(bgImage);
