@@ -6,8 +6,8 @@ The launcher for DVN.
 
 ## Preview
 
-![Project DVN Launcher 1](https://i.imgur.com/y7cnZyo.png "DVN Launcher 1")
+![Project DVN Launcher 1](https://projectdvn.com/images/preview_1.png "DVN Launcher 1")
 
-![Project DVN Launcher 2](https://i.imgur.com/moY3JNO.png "DVN Launcher 2")
+![Project DVN Launcher 2](https://projectdvn.com/images/preview_2.png "DVN Launcher 2")
 
-![Project DVN Launcher 3](https://i.imgur.com/SRb0suh.png "DVN Launcher 3")
+![Project DVN Launcher 3](https://projectdvn.com/images/preview_3.png "DVN Launcher 3")

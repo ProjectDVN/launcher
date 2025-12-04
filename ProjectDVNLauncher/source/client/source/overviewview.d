@@ -75,7 +75,7 @@ public final class OverviewView : View
         documentationLabel.show();
 
         documentationLabel.onMouseButtonUp(new MouseButtonEventHandler((b,p) {
-            browse("https://dvn-docs.readthedocs.io/en/latest/");
+            browse("https://projectdvn.com/docs/index");
         }));
         
         auto websiteLabel = new Label(window);
