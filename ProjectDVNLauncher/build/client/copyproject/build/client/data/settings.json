@@ -1,0 +1,35 @@
+{
+	"fonts": {
+		"msgothic": "data/fonts/msgothic.ttc",
+		"Calibri": "data/fonts/calibri.ttf"
+	},
+	"backupFonts": [
+		"msgothic"
+	],
+	"defaultFont": "Calibri",
+	"muteMusic": false,
+	"muteSoundEffects": false,
+	"volume": 20,
+	"mainScript": "main",
+	"textSpeed": 32,
+	"title": "PROJECT DVN",
+	"loadTitle": "LOADING PROJECT DVN",
+	"saves": {},
+	"fullScreen": false,
+	"defaultCharacterNameColors": {},
+	"dialoguePanelBackgroundColor": "000",
+	"dialoguePanelBorderColor": "000",
+	"namePanelBackgroundColor": "000",
+	"namePanelBorderColor": "000",
+	"loadText": "Load: ",
+	"backText": "Back",
+	"meta": null,
+	"saveButtonText": "Save",
+	"exitButtonText": "Exit",
+	"settingsButtonText": "Settings",
+	"autoButtonTextOn": "Auto: On",
+	"autoButtonTextOff": "Auto: Off",
+	"quickSaveButtonText": "Q-Save",
+	"dialogueHistory": false,
+	"disableLoadScreenMusic": true
+}
