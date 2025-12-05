@@ -165,7 +165,7 @@ public final class CreateProjectView : View
         websiteLabel.show();
 
         websiteLabel.onMouseButtonUp(new MouseButtonEventHandler((b,p) {
-            browse("https://github.com/ProjectDVN/dvn");
+            browse("https://projectdvn.com/");
         }));
     }
 

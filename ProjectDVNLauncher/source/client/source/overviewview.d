@@ -91,7 +91,7 @@ public final class OverviewView : View
         websiteLabel.show();
 
         websiteLabel.onMouseButtonUp(new MouseButtonEventHandler((b,p) {
-            browse("https://github.com/ProjectDVN/dvn");
+            browse("https://projectdvn.com/");
         }));
 
         auto exitLabel = new Label(window);
