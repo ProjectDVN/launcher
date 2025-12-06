@@ -5,7 +5,7 @@
 	"targetName": "DVN",
 	"dependencies": {
 		"derelict-util": "~>3.0.0-beta.1",
-		"dvn": "~>1.0.37"
+		"dvn": "~>1.0.38"
 	},
 	"configurations": [{
 		"name": "windows",
