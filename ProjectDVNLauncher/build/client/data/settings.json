@@ -31,5 +31,6 @@
 	"autoButtonTextOff": "Auto: Off",
 	"dialogueHistory": false,
 	"disableLoadScreenMusic": true,
-	"customStartView": "Overview"
+	"customStartView": "Overview",
+	"displayOptionsAsButtons": true
 }
