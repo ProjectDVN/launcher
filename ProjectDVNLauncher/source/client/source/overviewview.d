@@ -337,7 +337,10 @@ public final class OverviewView : View
             openFolderLabelEntry.onMouseButtonUp(new MouseButtonEventHandler((b,p) {
                 auto path = _currentProjectPath ~ "/build/client/data" ~ folderToOpen;
 
-                spawnProcess(["cmd.exe", "/c start " ~  path], ["foo": "bar"], Config.detached, path);
+                version (Windows)
+		{
+			spawnProcess(["cmd.exe", "/c start " ~  path], ["foo": "bar"], Config.detached, path);
+		}
             }));
 
             openFolderLabels ~= openFolderLabelEntry;
