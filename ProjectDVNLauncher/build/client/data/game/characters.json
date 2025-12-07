@@ -1,9 +1,2 @@
 {
-  "Stickman": {
-    "path": "data/game/characters/Stickman.png",
-    "size": {
-      "width": 266,
-      "height": 586
-    }
-  }
 }
