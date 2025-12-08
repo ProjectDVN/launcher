@@ -229,16 +229,24 @@ public final class CreateProjectView : View
         saveLabel.updateRect();
         saveLabel.show();
 
+        auto projectIDTextBox = new TextBox(window);
         auto projectNameTextBox = new TextBox(window);
 
-        auto shouldUpdate = currentProjectName && currentProjectName.strip.length;
+        auto shouldUpdate =
+            currentProjectName && currentProjectName.strip.length &&
+            currentProjectTitle && currentProjectTitle.strip.length;
 
         saveLabel.onMouseButtonUp(new MouseButtonEventHandler((b,p) {
+            if (!projectIDTextBox.text || !projectIDTextBox.text.strip.length)
+            {
+                return;
+            }
             if (!projectNameTextBox.text || !projectNameTextBox.text.strip.length)
             {
                 return;
             }
-            auto realProjectName = projectNameTextBox.text.strip.to!string;
+            auto realProjectName = projectIDTextBox.text.strip.to!string;
+            auto realProjectTitle = projectNameTextBox.text.strip.to!string;
             auto projectName = realProjectName.replace(" ", "_");
             auto projectFolder = "projects/" ~ projectName;
 
@@ -248,8 +256,8 @@ public final class CreateProjectView : View
 
                 auto gameSettings = loadGameSettingsJson(projectFolder);
 
-                gameSettings.title = realProjectName;
-                gameSettings.loadTitle = "LOADING " ~ realProjectName;
+                gameSettings.title = realProjectTitle;
+                gameSettings.loadTitle = "LOADING " ~ realProjectTitle;
 
                 saveGameSettingsJson(projectFolder, gameSettings);
             }
@@ -303,8 +311,8 @@ public final class CreateProjectView : View
 
                     auto gameSettings = loadGameSettingsJson(projectFolder);
 
-                    gameSettings.title = realProjectName;
-                    gameSettings.loadTitle = "LOADING " ~ realProjectName;
+                    gameSettings.title = realProjectTitle;
+                    gameSettings.loadTitle = "LOADING " ~ realProjectTitle;
 
                     string textColor = "fff";
                     string backgroundColor1 = "85c1e9";
@@ -354,17 +362,89 @@ public final class CreateProjectView : View
             displayView("Overview");
         }));
 
+        auto projectIDLabel = new Label(window);
+        addComponent(projectIDLabel);
+        projectIDLabel.fontName = settings.defaultFont;
+        projectIDLabel.fontSize = 48;
+        projectIDLabel.color = textColor.getColorByHex;
+        projectIDLabel.text = "PROJECT ID (short-name)";
+        projectIDLabel.shadow = true;
+        projectIDLabel.position = IntVector(
+            (window.width / 2) - (projectIDLabel.width / 2),
+            120);
+        projectIDLabel.updateRect();
+        projectIDLabel.show();
+
+        addComponent(projectIDTextBox);
+        projectIDTextBox.fontName = settings.defaultFont;
+        projectIDTextBox.fontSize = 24;
+        projectIDTextBox.size = IntVector((window.width / 100) * 50, 42);
+        projectIDTextBox.moveBelow(projectIDLabel, 14, true);
+        projectIDTextBox.textColor = textColor.getColorByHex;
+        projectIDTextBox.maxCharacters = 24;
+        projectIDTextBox.textPadding = 8;
+        projectIDTextBox.text = shouldUpdate ? currentProjectName.to!dstring : "";
+        
+        projectIDTextBox.defaultPaint.backgroundColor = textBoxColor.getColorByHex;
+        projectIDTextBox.hoverPaint.backgroundColor = textBoxColor.getColorByHex.changeAlpha(220);
+        projectIDTextBox.focusPaint.backgroundColor = textBoxColor.getColorByHex.changeAlpha(150);
+        projectIDTextBox.defaultPaint.borderColor = textBoxBorderColor.getColorByHex;
+        projectIDTextBox.hoverPaint.borderColor = textBoxBorderColor.getColorByHex;
+        projectIDTextBox.focusPaint.borderColor = textBoxBorderColor.getColorByHex;
+        projectIDTextBox.defaultPaint.shadowColor = textBoxColor.getColorByHex;
+        projectIDTextBox.hoverPaint.shadowColor = textBoxColor.getColorByHex.changeAlpha(220);
+        projectIDTextBox.focusPaint.shadowColor = textBoxColor.getColorByHex.changeAlpha(150);
+
+        projectIDTextBox.restyle();
+        projectIDTextBox.show();
+        if (shouldUpdate)
+        {
+            projectIDTextBox.defaultPaint.backgroundColor = "444".getColorByHex;
+            projectIDTextBox.hoverPaint.backgroundColor = "444".getColorByHex.changeAlpha(220);
+            projectIDTextBox.focusPaint.backgroundColor = "444".getColorByHex.changeAlpha(150);
+            projectIDTextBox.disable();
+            projectIDTextBox.restyle();
+            projectIDTextBox.show();
+        }
+        
+        auto projectIDDescriptionLabel = new Label(window);
+        addComponent(projectIDDescriptionLabel);
+        projectIDDescriptionLabel.fontName = settings.defaultFont;
+        projectIDDescriptionLabel.fontSize = 18;
+        projectIDDescriptionLabel.color = textColor.getColorByHex;
+        projectIDDescriptionLabel.text = shouldUpdate ? "The Project ID" : "Enter the ID of the project (a-z,0-9).";
+        projectIDDescriptionLabel.shadow = true;
+        projectIDDescriptionLabel.moveBelow(projectIDTextBox, 14, true);
+        projectIDDescriptionLabel.updateRect();
+        projectIDDescriptionLabel.show();
+        
+        auto projectIDLine = new Panel(window);
+        addComponent(projectIDLine);
+        projectIDLine.size = IntVector(projectIDTextBox.width, 4);
+        projectIDLine.moveBelow(projectIDDescriptionLabel, 14, true);
+        projectIDLine.fillColor = selectColor.getColorByHex;
+        projectIDLine.show();
+        
+        auto projectNameLabel = new Label(window);
+        addComponent(projectNameLabel);
+        projectNameLabel.fontName = settings.defaultFont;
+        projectNameLabel.fontSize = 48;
+        projectNameLabel.color = textColor.getColorByHex;
+        projectNameLabel.text = "PROJECT NAME";
+        projectNameLabel.shadow = true;
+        projectNameLabel.moveBelow(projectIDLine, 14, true);
+        projectNameLabel.updateRect();
+        projectNameLabel.show();
+
         addComponent(projectNameTextBox);
         projectNameTextBox.fontName = settings.defaultFont;
         projectNameTextBox.fontSize = 24;
         projectNameTextBox.size = IntVector((window.width / 100) * 50, 42);
-        projectNameTextBox.position = IntVector(
-            (window.width / 2) - (projectNameTextBox.width / 2),
-            120);
+        projectNameTextBox.moveBelow(projectNameLabel, 14, true);
         projectNameTextBox.textColor = textColor.getColorByHex;
-        projectNameTextBox.maxCharacters = 32;
+        projectNameTextBox.maxCharacters = 80;
         projectNameTextBox.textPadding = 8;
-        projectNameTextBox.text = currentProjectName.to!dstring;
+        projectNameTextBox.text = shouldUpdate ? currentProjectTitle.to!dstring : "";
         
         projectNameTextBox.defaultPaint.backgroundColor = textBoxColor.getColorByHex;
         projectNameTextBox.hoverPaint.backgroundColor = textBoxColor.getColorByHex.changeAlpha(220);
@@ -384,38 +464,18 @@ public final class CreateProjectView : View
         projectDescriptionLabel.fontName = settings.defaultFont;
         projectDescriptionLabel.fontSize = 18;
         projectDescriptionLabel.color = textColor.getColorByHex;
-        projectDescriptionLabel.text = "Enter the name of the project";
+        projectDescriptionLabel.text = "Enter the name of the project.";
         projectDescriptionLabel.shadow = true;
-        projectDescriptionLabel.position = IntVector(
-            (window.width / 2) - (projectDescriptionLabel.width / 2),
-            projectNameTextBox.y - (projectDescriptionLabel.height + 8)
-        );
+        projectDescriptionLabel.moveBelow(projectNameTextBox, 14, true);
         projectDescriptionLabel.updateRect();
         projectDescriptionLabel.show();
         
         auto projectNameLine = new Panel(window);
         addComponent(projectNameLine);
         projectNameLine.size = IntVector(projectNameTextBox.width, 4);
-        projectNameLine.position = IntVector(
-            (window.width / 2) - (projectNameLine.width / 2),
-            projectDescriptionLabel.y - (projectNameLine.height + 8)
-        );
+        projectNameLine.moveBelow(projectDescriptionLabel, 14, true);
         projectNameLine.fillColor = selectColor.getColorByHex;
         projectNameLine.show();
-        
-        auto projectNameLabel = new Label(window);
-        addComponent(projectNameLabel);
-        projectNameLabel.fontName = settings.defaultFont;
-        projectNameLabel.fontSize = 48;
-        projectNameLabel.color = textColor.getColorByHex;
-        projectNameLabel.text = "PROJECT NAME";
-        projectNameLabel.shadow = true;
-        projectNameLabel.position = IntVector(
-            (window.width / 2) - (projectNameLabel.width / 2),
-            projectNameLine.y - (projectNameLabel.height + 14)
-        );
-        projectNameLabel.updateRect();
-        projectNameLabel.show();
 
         if (!shouldUpdate)
         {
@@ -426,10 +486,7 @@ public final class CreateProjectView : View
             projectThemeDescriptionLabel.color = textColor.getColorByHex;
             projectThemeDescriptionLabel.text = "Select the color theme for the project";
             projectThemeDescriptionLabel.shadow = true;
-            projectThemeDescriptionLabel.position = IntVector(
-                (window.width / 2) - (projectThemeDescriptionLabel.width / 2),
-                projectNameTextBox.y + projectNameTextBox.height + 14
-            );
+            projectThemeDescriptionLabel.moveBelow(projectNameLine, 14, true);
             projectThemeDescriptionLabel.updateRect();
             projectThemeDescriptionLabel.show();
             

@@ -58,6 +58,7 @@ public final class OverviewView : View
 
         string _currentProjectName;
         string _currentProjectPath;
+        string _currentProjectTitle;
     }
 
     void renderLinkLine(Window window, string textColor, GameSettings settings)
@@ -207,6 +208,7 @@ public final class OverviewView : View
 
         int projectLabelY = 14;
         Label lastSelectedProjectLabel;
+        
         foreach (string name; dirEntries("projects", SpanMode.shallow))
         {
             auto closure = (Label pLabel, string pName, string pPath) { return () {
@@ -229,7 +231,9 @@ public final class OverviewView : View
             projectLabel.fontName = settings.defaultFont;
             projectLabel.fontSize = 22;
             projectLabel.color = textColor.getColorByHex;
-            projectLabel.text = baseName(name).replace("_", " ").to!dstring;
+            import createprojectview : loadGameSettingsJson;
+            auto title = loadGameSettingsJson("projects/" ~ baseName(name)).title;
+            projectLabel.text = title.to!dstring;
             projectLabel.shadow = true;
             projectLabel.isLink = true;
             projectLabel.position = IntVector(14, projectLabelY);
@@ -242,6 +246,7 @@ public final class OverviewView : View
         }
         
         scrollbarMessages.updateScrollView();
+        projectsPanel.makeScrollableWithWheel();
         
         auto createNewProjectLabel = new Label(window);
         addComponent(createNewProjectLabel);
@@ -338,9 +343,18 @@ public final class OverviewView : View
                 auto path = _currentProjectPath ~ "/build/client/data" ~ folderToOpen;
 
                 version (Windows)
-		{
-			spawnProcess(["cmd.exe", "/c start " ~  path], ["foo": "bar"], Config.detached, path);
-		}
+		        {
+                    spawnProcess(["cmd.exe", "/c start " ~  path], ["foo": "bar"], Config.detached, path);
+		        }
+                // Note sure if the below is correct ...
+                else version (OSX)
+                {
+                    spawnProcess(["open", path], ["foo":"bar"], Config.detached, path);
+                }
+                else version (linux)
+                {
+                    spawnProcess(["xdg-open", path], ["foo":"bar"], Config.detached, path);
+                }
             }));
 
             openFolderLabels ~= openFolderLabelEntry;
@@ -407,6 +421,7 @@ public final class OverviewView : View
         createEditProjectLabel("PROJECT NAME",
         {
             currentProjectName = _currentProjectName.replace("_", " ");
+            currentProjectTitle = _currentProjectTitle;
             
             displayView("CreateProject");
         });
@@ -433,14 +448,32 @@ public final class OverviewView : View
 
             remove(_currentProjectPath ~ "/build/client/data/game/history.json");
         });
+
+        createEditProjectLabel("CHARACTERS",
+        {
+            currentProjectName = _currentProjectName.replace("_", " ");
+            currentProjectTitle = _currentProjectTitle;
+
+            displayView("EditCharacters");
+        });
+
+        // TODO: a view similar to characters but for backgrounds ...
+        // createEditProjectLabel("BACKGROUNDS",
+        // {
+        //     currentProjectName = _currentProjectName.replace("_", " ");
+        //     currentProjectTitle = _currentProjectTitle;
+        // });
     }
 
     void showProject(string path, string name)
     {
+        import createprojectview;
+
         _currentProjectName = name;
         _currentProjectPath = getcwd.replace("\\", "/") ~ "/" ~ path;
+        _currentProjectTitle = loadGameSettingsJson("projects/" ~ _currentProjectName).title;
         
-        projectNameLabel.text = ("PROJECT: " ~ _currentProjectName.replace("_", " ")).to!dstring;
+        projectNameLabel.text = ("PROJECT: " ~ _currentProjectTitle).to!dstring;
         projectNameLabel.show();
         projectNameLabelLine.show();
 

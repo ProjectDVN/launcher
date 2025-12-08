@@ -6,6 +6,7 @@ import core.stdc.stdlib : exit;
 
 import overviewview;
 import createprojectview;
+import editcharactersview;
 
 version (Windows)
 {
@@ -80,6 +81,7 @@ public final class Events : DvnEvents
 	{
 		window.addView!OverviewView("Overview");
 		window.addView!CreateProjectView("CreateProject");
+		window.addView!EditCharactersView("EditCharacters");
 	}
 }
 
