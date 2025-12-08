@@ -32,5 +32,6 @@
 	"dialogueHistory": false,
 	"disableLoadScreenMusic": true,
 	"customStartView": "Overview",
-	"displayOptionsAsButtons": true
+	"displayOptionsAsButtons": true,
+	"autoSpeed": 1
 }
