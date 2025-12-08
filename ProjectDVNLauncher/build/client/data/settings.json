@@ -33,5 +33,7 @@
 	"disableLoadScreenMusic": true,
 	"customStartView": "Overview",
 	"displayOptionsAsButtons": true,
-	"autoSpeed": 1
+	"autoSpeed": 1,
+	"textPanelOpacityLevel": 150,
+	"windowFadeTime": 24
 }
