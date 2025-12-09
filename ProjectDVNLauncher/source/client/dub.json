@@ -5,8 +5,11 @@
 	"targetName": "DVN",
 	"dependencies": {
 		"derelict-util": "~>3.0.0-beta.1",
-		"dvn": "~>1.1.2"
+		"dvn": "~>1.1.3"
 	},
+	"stringImportPaths": [
+		"extensions"
+	],
 	"configurations": [{
 		"name": "windows",
 		"lflags": ["/LIBPATH:libs_derelict_sdl", "/SUBSYSTEM:windows"]
