@@ -1,0 +1,59 @@
+{
+	"main_menu": {
+		"new_game": "New Game",
+		"load_game": "Load Game",
+		"history": "History",
+		"settings": "Settings",
+		"gallery": "Gallery",
+		"exit": "Exit"
+	},
+	"load_game": {
+		"back": "Back",
+		"load": "Load: {save}"
+	},
+	"history": {
+		"back": "Back",
+		"search": "Search"
+	},
+	"gallery": {
+		"back": "Back"
+	},
+	"settings": {
+		"back": "Back",
+		"video": "VIDEO",
+		"full_screen": "Full Screen",
+		"character_fade": "Character Fade",
+		"text_fade": "Text Fade",
+		"text_panel_opacity_level": "Text Panel Opacity Level",
+		"highlight_new_text": "Highlight New Text",
+		"window_fade_time": "Window Fade Time",
+		"dialogue_text_line_spacing": "Dialogue Text Line-Spacing",
+		"audio": "AUDIO",
+		"volume": "Volume",
+		"mute_bgm": "Mute BGM",
+		"mute_sfx": "Mute SFX",
+		"voice_timing_multiplier": "Voice Timing Multiplier",
+		"gameplay": "GAMEPLAY",
+		"auto_save": "Auto Save",
+		"text_speed": "Text Speed",
+		"disable_swipe_gesture": "Disable Swipe Gesture",
+		"disable_continue_arrow": "Disable Continue Arrow",
+		"auto_speed_increase": "Auto Speed Increase",
+		"click_text_panel_to_advance": "Click Text-Panel To Advance",
+		"hide_auto_indicator": "Hide Auto Indicator",
+		"immersion_mode": "Immersion Mode",
+		"disable_effects": "Disable Effects"
+	},
+	"vn": {
+		"save": "Save",
+		"exit": "Exit",
+		"settings": "Settings",
+		"auto_on": "Auto: {{states::on}}",
+		"auto_off": "Auto: {{states::off}}",
+		"quick_save": "Q-Save"
+	},
+	"states": {
+		"on": "On",
+		"off": "Off"
+	}
+}
