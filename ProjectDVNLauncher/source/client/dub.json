@@ -5,7 +5,7 @@
 	"targetName": "DVN",
 	"dependencies": {
 		"derelict-util": "~>3.0.0-beta.1",
-		"dvn": "~>1.1.17"
+		"dvn": "~>1.1.18"
 	},
 	"stringImportPaths": [
 		"extensions"
@@ -19,5 +19,9 @@
 	}, {
 		"name": "macos",
 		"lflags": ["/LIBPATH:libs_derelict_sdl"]
+	}, {
+		"name": "unittest",
+		"excludedSourceFiles": ["source/main.d"],
+		"sourcePaths": ["test"]
 	}]
 }
