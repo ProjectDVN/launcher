@@ -1,0 +1,25 @@
+img[src=MainMenuBackground] {
+    position: center;
+}
+
+img[src=Logo] {
+    position: top-center;
+    margin-top: 12;
+}
+
+#playLabel {
+    position: center;
+    font-size: 32;
+    font-style: link shadow;
+    font-family: Calibri;
+    color: #fff;
+}
+
+.menuLabel {
+    position: center;
+    font-size: 32;
+    font-style: link shadow;
+    font-family: Calibri;
+    color: #fff;
+    margin-top: 16;
+}
