@@ -3,23 +3,14 @@ img[src=MainMenuBackground] {
 }
 
 img[src=Logo] {
-    position: top-center;
+    position: top;
     margin-top: 12;
 }
 
-#playLabel {
+section span {
     position: center;
     font-size: 32;
     font-style: link shadow;
     font-family: Calibri;
     color: #fff;
-}
-
-.menuLabel {
-    position: center;
-    font-size: 32;
-    font-style: link shadow;
-    font-family: Calibri;
-    color: #fff;
-    margin-top: 16;
 }
